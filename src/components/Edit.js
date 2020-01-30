@@ -2,17 +2,24 @@ import React, { Component } from 'react'
 import Form from './Form.js'
 import Header from './Header.js'
 import Axios from 'axios'
+import { Redirect } from "react-router-dom";
 
 export class Edit extends Component {
     constructor(props){
         super(props);
         this.state = {
-            movie: null
+            movie: null,
+            redirect: false,
         }
     }
 
     axiosPut = (state) => {
         Axios.put('http://3.120.96.16:3001/movies/' + this.props.match.params.id, state)
+        .then(res => {
+            this.setState({
+              redirect: true
+            })        
+        })
         .catch((err) => {
             alert('error!')
         })
@@ -33,7 +40,9 @@ export class Edit extends Component {
 
     }
     render() {
-        console.log(this.state.movie)
+        if(this.state.redirect){
+            return <Redirect to = '/' />
+        }
         return (
             <div>
                 <Header />

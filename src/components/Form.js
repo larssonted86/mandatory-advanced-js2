@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Redirect } from "react-router-dom";
 
 export class Form extends Component {
     constructor(props){
@@ -14,7 +13,7 @@ export class Form extends Component {
                 description: movie.description || '',
                 rating: movie.rating || '',
             },
-            redirect: false,
+            
         } 
 
         this.onChange = this.onChange.bind(this)        
@@ -36,15 +35,10 @@ export class Form extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.setState({
-            redirect: true
-        })
     }
 
     render() {
-        if(this.state.redirect){
-            return <Redirect to = '/' />
-        }
+        
         const state = this.state.movie;
         return (
             <div>
