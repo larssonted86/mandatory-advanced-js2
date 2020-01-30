@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 export class Form extends Component {
     constructor(props){
         super(props);
@@ -13,7 +14,6 @@ export class Form extends Component {
                 description: movie.description || '',
                 rating: movie.rating || '',
             },
-            
         } 
 
         this.onChange = this.onChange.bind(this)        
@@ -56,21 +56,29 @@ export class Form extends Component {
                     placeholder = 'Director:'
                     value={state.director}
                     style = {inputStyle}
-                    onChange = {this.onChange}></input>
+                    onChange = {this.onChange}></input>                    
+                    <label><h4>Rating</h4></label>                                 
+                    <select 
+                    style = {{width: '150px'}}
+                    name = 'rating'
+                    value={state.rating} 
+                    onChange = {this.onChange}
+                    placeholder = 'Rating:' >                    
+                        <option value="select Rating">Select Rating</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>                    
                     <label><h4>Description</h4></label>
-                    <input type = 'text' 
+                    <textarea type = 'text' 
                     name = 'description'
                     placeholder = 'Description:'
                     value={state.description}
                     style = {inputStyle}
-                    onChange = {this.onChange}></input>
-                    <label><h4>Rating</h4></label>
-                    <input type = 'text' 
-                    name = 'rating'
-                    placeholder = 'Rating:'
-                    value={state.rating}
-                    style = {inputStyle}
-                    onChange = {this.onChange}></input>
+                    onChange = {this.onChange}></textarea>
                     <button style = {buttonStyle}
                     onClick={() => this.props.axiosEvent(state)}>{this.props.buttonText}</button>
                 </form>               
@@ -81,6 +89,9 @@ export class Form extends Component {
 
 
 ////////////////////////////////////////////STYLES//////////////////////////////////////////////////////////////
+
+
+
 
 const formStyle = {
     display: 'flex',

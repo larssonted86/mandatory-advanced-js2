@@ -32,13 +32,16 @@ export class Add extends Component {
         }
         return (
             <div>
-                <Header />
+                <Header />                
                 <Form buttonText = 'Add' 
-                  axiosEvent = {this.axiosPost} />
+                axiosEvent = {this.axiosPost}
+                />               
             </div>
         )
     }
 }
+
+
 
 
 export default Add
