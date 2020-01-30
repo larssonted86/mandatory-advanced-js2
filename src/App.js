@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -7,37 +6,22 @@ import {
 } from "react-router-dom";
 import Main from './components/Main.js'
 import Add from './components/Add.js'
+import Details from './components/Details.js'
+import Edit from './components/Edit.js'
+
 
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      movies: [],
-     }
-  }
-
-  componentDidMount(){
-    axios.get('http://3.120.96.16:3001/movies/')
-    .then(res => {
-      console.log(res)
-      this.setState({
-        movies: res.data
-      })
-    })
-  }
-  
+    
 
   render(){
     return (
       <Router>
       <div className="App">
-        <Route path="/" exact>
-          <Main  movies = {this.state.movies}/>
-        </Route>
-        <Route path="/add">
-          <Add  movies = {this.state.movies}/>
-        </Route>
+        <Route path="/" exact component={Main} />
+        <Route path="/add" component={Add} />
+        <Route path="/details/:id" component={Details} />
+        <Route path="/edit/:id" component={Edit} />
       </div>
       </Router>
       );

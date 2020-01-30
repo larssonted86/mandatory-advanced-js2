@@ -9,6 +9,10 @@ export class Add extends Component {
 
     axiosPost = (state) => {
         axios.post('http://3.120.96.16:3001/movies', state)
+        .catch((err) => {
+            alert('error!')
+        })
+
         }
     
     
@@ -18,7 +22,7 @@ export class Add extends Component {
             <div>
                 <Header />
                 <Form buttonText = 'Add' 
-                axiosEvent = {this.axiosPost} />
+                  axiosEvent = {this.axiosPost} />
             </div>
         )
     }

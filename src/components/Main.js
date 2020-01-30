@@ -1,11 +1,41 @@
 import React, { Component } from 'react'
 import Header from './Header.js'
+import Axios from 'axios'
+import { Link } from "react-router-dom"
 
 export class Main extends Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+          movies: [],
+         }
+      }
 
+
+    componentDidMount(){
+        console.log("FETCH");
+        Axios.get('http://3.120.96.16:3001/movies/')
+        .then(res => {
+            console.log("FETCHED");
+          this.setState({
+            movies: res.data
+          })
+        })
+      }
+      
+    deleteMovie = (id) =>{
+        Axios.delete('http://3.120.96.16:3001/movies/' + id)
+            .then(() => {
+                this.setState({ movies: this.state.movies.filter(x => x.id !== id)});
+            });
+    }
+
+    movieDetails= (id) =>{
+        Axios.get('http://3.120.96.16:3001/movies/' + id)
+        }
+    
     renderTableData(){
-        return this.props.movies.map((movie) => {
+        return this.state.movies.map((movie) => {
             const {rating, title, director,id} = movie
             return (
                 <tr key={id}>
@@ -13,16 +43,18 @@ export class Main extends Component {
                     <td style = {tdStyle}><h4>Director:</h4> {director}</td>
                     <td style = {tdStyle}><h4>rating:</h4> {rating}</td>
                     <td style = {tdStyle}>
-                        <button style = {buttonStyle}>Details</button>
-                        <button style = {buttonStyle}>Edit</button>
-                        <button style = {buttonStyle}>Remove</button>
+                       <Link to = {'/details/' + movie.id} params={{id: movie.id}}><button style = {buttonStyle}
+                        >Details</button></Link> 
+                        <Link to = {'/edit/' + movie.id} params={{id: movie.id}}><button style = {buttonStyle}
+                        >Edit</button></Link>
+                        <button style = {buttonStyle}
+                        onClick= {() => this.deleteMovie(movie.id)} >Remove</button>
                     </td>                    
                 </tr>
             )
         })
-    }
+    }    
     render() {
-        console.log(this.props.movies)
         return (
             <div>   
                 <Header />
