@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from './Header.js'
 import Axios from 'axios'
 import { Link } from "react-router-dom"
+import {Helmet} from "react-helmet";
 
 export class Main extends Component {
     constructor(props) {
@@ -12,7 +13,8 @@ export class Main extends Component {
          }
       }
 
-
+    //makes a call to the server when the component is mounted and gets the movielist in return 
+    //if there is an error there will be an error card displayed
     componentDidMount(){
         Axios.get('http://3.120.96.16:3001/movies/')
         .then(res => {
@@ -27,6 +29,8 @@ export class Main extends Component {
       })
       }
       
+     // function that lets the user delete a movie 
+    //if there is an error there will be an error card displayed
     deleteMovie = (id) =>{
         Axios.delete('http://3.120.96.16:3001/movies/' + id)
             .then(() => {
@@ -39,6 +43,8 @@ export class Main extends Component {
           })
     }
 
+    //function that makes a call to the server and gets a single movie in return
+    //if there is an error there will be an error card displayed
     movieDetails= (id) =>{
         Axios.get('http://3.120.96.16:3001/movies/' + id)
         .catch((error) => {
@@ -48,10 +54,13 @@ export class Main extends Component {
       })
         }
 
+        //function that changes the state.search value on change
         onChange = (e) =>{
             this.setState({search: e.target.value})
         }
-    
+        
+    //function that takes the data in state.movies and renders a row with information for each movie in the array
+    //the filter before the map is to enable the search function to display only certain movies.
     renderTableData(){
         return  this.state.movies.filter((movieToSearch) => {
             let query = this.state.search.toLowerCase();
@@ -82,10 +91,14 @@ export class Main extends Component {
                 </tr>
             )
         })
-    }    
+    }  
+
     render() {
         return (
             <div>   
+                <Helmet>
+                    <title>Main</title>
+                </Helmet>
                 <Header />
                 <input type = 'text' 
                 placeholder = 'Search'
@@ -104,7 +117,7 @@ export class Main extends Component {
 }
 
 
-
+/////////////////////////////////////////////////////////STYLES/////////////////////////////////////////////////////////////////
 const errorCardStyle = {
   width: '400px',
   height: '600px',

@@ -20,7 +20,7 @@ export class Form extends Component {
     }
 
     
-    
+    //function that lets the user change the value of the this.state values
     onChange(e) {
         const target = e.target;
         const name = target.name;
@@ -31,7 +31,6 @@ export class Form extends Component {
                [name]: value
             }
         })
-        console.log(this.state.movie)
     }
 
     onSubmit = (e) => {

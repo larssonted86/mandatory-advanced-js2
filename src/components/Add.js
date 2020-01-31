@@ -3,6 +3,9 @@ import Header from './Header.js'
 import Form from './Form.js'
 import axios from 'axios';
 import { Redirect } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {Helmet} from "react-helmet";
+
 
 
 
@@ -14,6 +17,8 @@ export class Add extends Component {
        }
    }
 
+   //function that lets the user post a movie to the server
+    //if there is an error there will be an error card displayed
     axiosPost = (state) => {
         axios.post('http://3.120.96.16:3001/movies', state)
         .then(res => {
@@ -23,7 +28,8 @@ export class Add extends Component {
         })
         .catch((error) => {
             return <div style = {errorCardStyle}>
-            <h4>I am sorry an error has occured, please try and reload the page</h4> 
+            <h4>I am sorry an error has occured, please return to main</h4> 
+            <Link to="/" style = {linkStyle}>Main</Link>
             </div>
         })
     }
@@ -34,6 +40,9 @@ export class Add extends Component {
         }
         return (
             <div>
+                <Helmet>
+                <title>Add</title>
+                </Helmet>
                 <Header />                
                 <Form buttonText = 'Add' 
                 axiosEvent = {this.axiosPost}
@@ -54,6 +63,12 @@ const errorCardStyle = {
     boxShadow: '0px 10px 5px grey',
   }
 
+  const linkStyle = {
+    textdecoration: 'none',
+    color: '#000000',
+    backgroundColor: '#c43e00',
+    fontSize: '36px',
+}
 
 
 export default Add
