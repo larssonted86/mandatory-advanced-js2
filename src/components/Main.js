@@ -20,17 +20,32 @@ export class Main extends Component {
             movies: res.data
           })
         })
+        .catch((error) => {
+          return <div style = {errorCardStyle}>
+          <h4>I am sorry an error has occured, please try and reload the page</h4> 
+          </div>
+      })
       }
       
     deleteMovie = (id) =>{
         Axios.delete('http://3.120.96.16:3001/movies/' + id)
             .then(() => {
-                this.setState({ movies: this.state.movies.filter(x => x.id !== id)});
-            });
+                this.setState({ movies: this.state.movies.filter(x => x.id !== id)})
+            })
+            .catch((error) => {
+              return <div style = {errorCardStyle}>
+              <h4>I am sorry an error has occured, please try and reload the page</h4> 
+              </div>
+          })
     }
 
     movieDetails= (id) =>{
         Axios.get('http://3.120.96.16:3001/movies/' + id)
+        .catch((error) => {
+          return <div style = {errorCardStyle}>
+          <h4>I am sorry an error has occured, please try and reload the page</h4> 
+          </div>
+      })
         }
 
         onChange = (e) =>{
@@ -86,6 +101,16 @@ export class Main extends Component {
             </div>
         )
     }
+}
+
+
+
+const errorCardStyle = {
+  width: '400px',
+  height: '600px',
+  border: 'solid 1px grey',
+  borderRadius: '54px',
+  boxShadow: '0px 10px 5px grey',
 }
 
 const tableStyle={

@@ -31,12 +31,13 @@ export class Form extends Component {
                [name]: value
             }
         })
+        console.log(this.state.movie)
     }
 
     onSubmit = (e) => {
         e.preventDefault();
     }
-
+    
     render() {
         
         const state = this.state.movie;
@@ -57,21 +58,15 @@ export class Form extends Component {
                     value={state.director}
                     style = {inputStyle}
                     onChange = {this.onChange}></input>                    
-                    <label><h4>Rating</h4></label>                                 
-                    <select 
-                    style = {{width: '150px'}}
-                    name = 'rating'
-                    value={state.rating} 
-                    onChange = {this.onChange}
-                    placeholder = 'Rating:' >                    
-                        <option value="select Rating">Select Rating</option>
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>                    
+                    <label><h4>Rating: {this.state.movie.rating}</h4></label>
+                    <input 
+                        name = 'rating'
+                        style={{width: '200px'}}
+                        type="range" 
+                        defaultValue = '3'
+                        min="0" max="5" 
+                        onChange={this.onChange}
+                        step="0.5"/>
                     <label><h4>Description</h4></label>
                     <textarea type = 'text' 
                     name = 'description'

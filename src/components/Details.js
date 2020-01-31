@@ -21,6 +21,11 @@ export class Details extends Component {
                 movie: res.data
               })
         })
+        .catch((error) => {
+            return <div style = {errorCardStyle}>
+            <h4>I am sorry an error has occured, please try and reload the page</h4> 
+            </div>
+        })
 
     }
     render() {
@@ -38,6 +43,15 @@ export class Details extends Component {
         )
     }
 }
+
+//////////////////////////////////////////STYLES///////////////////////////////////////////////////////////////////////////////////
+const errorCardStyle = {
+    width: '400px',
+    height: '600px',
+    border: 'solid 1px grey',
+    borderRadius: '54px',
+    boxShadow: '0px 10px 5px grey',
+  }
 
 const buttonStyle = {
     border: '1px solid #c43e00',

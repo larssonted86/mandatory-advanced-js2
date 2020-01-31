@@ -20,8 +20,10 @@ export class Edit extends Component {
               redirect: true
             })        
         })
-        .catch((err) => {
-            alert('error!')
+        .catch((error) => {
+            return <div style = {errorCardStyle}>
+            <h4>I am sorry an error has occured, please try and reload the page</h4> 
+            </div>
         })
 
         }
@@ -34,8 +36,10 @@ export class Edit extends Component {
                 movie: res.data
               })
         })
-        .catch((err) => {
-            alert('this movie is no longer available!')
+        .catch((error) => {
+            return <div style = {errorCardStyle}>
+            <h4>I am sorry an error has occured, please try and reload the page</h4> 
+            </div>
         })
 
     }
@@ -51,5 +55,14 @@ export class Edit extends Component {
         )
     }
 }
+
+//////////////////////////////////////////STYLES///////////////////////////////////////////////////////////////////////////////////
+const errorCardStyle = {
+    width: '400px',
+    height: '600px',
+    border: 'solid 1px grey',
+    borderRadius: '54px',
+    boxShadow: '0px 10px 5px grey',
+  }
 
 export default Edit
