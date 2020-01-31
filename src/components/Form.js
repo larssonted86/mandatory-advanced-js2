@@ -37,7 +37,7 @@ export class Form extends Component {
     onSubmit = (e) => {
         e.preventDefault();
     }
-    
+
     render() {
         
         const state = this.state.movie;
@@ -45,19 +45,27 @@ export class Form extends Component {
             <div>
                 <form onSubmit={this.onSubmit} style = {formStyle}> 
                     <label><h4>Title</h4></label>
-                    <input type = 'text' 
+                    <input 
+                    type = 'text' 
                     name = 'title'
                     placeholder = 'Title:' 
                     value={state.title}
                     style = {inputStyle}
-                    onChange = {this.onChange}></input>
+                    onChange = {this.onChange}
+                    minLength = '1'
+                    maxLength = '40'
+                    required></input>
                     <label><h4>Director</h4></label>
-                    <input type = 'text' 
+                    <input 
+                    type = 'text' 
                     name = 'director'
                     placeholder = 'Director:'
                     value={state.director}
                     style = {inputStyle}
-                    onChange = {this.onChange}></input>                    
+                    onChange = {this.onChange}
+                    minLength = '1'
+                    maxLength = '40'
+                    required></input>                    
                     <label><h4>Rating: {this.state.movie.rating}</h4></label>
                     <input 
                         name = 'rating'
@@ -68,12 +76,16 @@ export class Form extends Component {
                         onChange={this.onChange}
                         step="0.5"/>
                     <label><h4>Description</h4></label>
-                    <textarea type = 'text' 
+                    <textarea 
+                    type = 'text' 
                     name = 'description'
                     placeholder = 'Description:'
                     value={state.description}
                     style = {inputStyle}
-                    onChange = {this.onChange}></textarea>
+                    onChange = {this.onChange}
+                    minLength = '1'
+                    maxLength = '300'
+                    required></textarea>
                     <button style = {buttonStyle}
                     onClick={() => this.props.axiosEvent(state)}>{this.props.buttonText}</button>
                 </form>               
